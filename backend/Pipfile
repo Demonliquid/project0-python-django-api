@@ -16,6 +16,7 @@ djangorestframework = "*"
 django-cors-headers = "*"
 dj-rest-auth = "*"
 pillow = "*"
+celery = "*"
 
 [dev-packages]
 
