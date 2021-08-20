@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .migrations import Cryptocurrency
+from .models import Cryptocurrency
 
 admin.site.register(Cryptocurrency)

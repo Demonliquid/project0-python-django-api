@@ -17,6 +17,7 @@ django-cors-headers = "*"
 dj-rest-auth = "*"
 pillow = "*"
 celery = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
 

@@ -4,5 +4,5 @@ from .models import Cryptocurrency
 from .serializers import CryptocurrencySerializer
 
 class ListCryptoCurrencyView(generics.ListAPIView):
-	queryset = Cryptocurrency.objects.all()
+    queryset = Cryptocurrency.objects.all()
     serializer_class = CryptocurrencySerializer
