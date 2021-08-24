@@ -4,6 +4,26 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
 import re
 
+
+
+# %%
+print('Crawling data and creating objects in database')
+req = Request('https://dolarhoy.com/', headers={'User-Agent': 'Mozilla/5.0'})
+html = urlopen(req).read()
+bs = BeautifulSoup(html, 'html.parser')
+rows = bs.find("div", class_="tile is-parent is-7 is-vertical").find_all('div', class_="tile is-child")[0:5]
+for row in rows:
+    tipo_dolar = row.find('a', class_='title').get_text().strip().replace('\n', '').capitalize()
+    values = row.find_all('div', class_="venta")
+    cotizacion_en_pesos = values[0].get_text().strip().replace('\n', '').replace(' ', '').replace(',', '').replace('$', '')
+    cotizacion_en_pesos = re.sub('[^0-9.]', '', cotizacion_en_pesos)
+    print({'tipo_dolar':tipo_dolar,
+            'cotizacion_en_pesos': cotizacion_en_pesos})
+
+
+
+
+
 # %%
 print('Crawling data and creating objects in database')
 req = Request('https://coinranking.com/?sortby=asc&sorton=market-cap', headers={'User-Agent': 'Mozilla/5.0'})
