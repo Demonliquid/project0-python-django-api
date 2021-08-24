@@ -10,3 +10,11 @@ class Cryptocurrency(models.Model):
 
     def __str__(self):
         return self.cryptocurrency_name
+
+
+class Dolarhoy(models.Model):
+    tipo_dolar = models.CharField(max_length=100)
+    cotizacion_en_pesos = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.tipo_dolar

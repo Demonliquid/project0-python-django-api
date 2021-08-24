@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import Cryptocurrency
-from .serializers import CryptocurrencySerializer
+from .models import Cryptocurrency, Dolarhoy
+from .serializers import CryptocurrencySerializer, DolarhoySerializer
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticated, IsAuthenticatedOrReadOnly, BasePermission, IsAdminUser, DjangoModelPermissions
 from rest_framework import viewsets
 from rest_framework import filters
@@ -12,3 +12,8 @@ class CryptoViewSet(viewsets.ModelViewSet): # new
     permission_classes = (IsAuthenticated,)
     queryset = Cryptocurrency.objects.all()
     serializer_class = CryptocurrencySerializer
+
+class DolarViewSet(viewsets.ModelViewSet): # new
+    permission_classes = (IsAuthenticated,)
+    queryset = Dolarhoy.objects.all()
+    serializer_class = DolarhoySerializer
