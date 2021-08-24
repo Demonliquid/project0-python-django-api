@@ -9,6 +9,6 @@ from rest_framework.response import Response
 
 
 class CryptoViewSet(viewsets.ModelViewSet): # new
-    permission_classes = IsAuthenticated
+    permission_classes = (IsAuthenticated,)
     queryset = Cryptocurrency.objects.all()
     serializer_class = CryptocurrencySerializer
