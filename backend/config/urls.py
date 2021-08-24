@@ -19,5 +19,5 @@ from cryptoapi.views import ListCryptoCurrencyView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', ListCryptoCurrencyView.as_view()),  # API View
+    path('api/v1/', include('cryptoapi.urls')),  # API View
 ]

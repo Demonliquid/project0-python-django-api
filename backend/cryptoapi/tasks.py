@@ -74,4 +74,6 @@ def update_currency():
 
 
 crawl_currency()
-update_currency()
+while True:
+	update_currency()
+	sleep(15)
