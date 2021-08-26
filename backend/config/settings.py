@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'allauth.account',  # dj-rest-auth
     'allauth.socialaccount',  # dj-rest-auth
     'dj_rest_auth',  # dj-rest-auth
-    'dj_rest_auth.registration'  # dj-rest-auth
+    'dj_rest_auth.registration',  # dj-rest-auth
     'dj_rest_auth.jwt_auth.JWTCookieAuthentication',  # dj-rest-auth
 
     # LOCAL
