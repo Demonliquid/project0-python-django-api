@@ -19,4 +19,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/user/', include('accounts.urls', namespace='users')), # Accounts View
+    path('dj-rest-auth/', include('dj_rest_auth.urls'))  # dj-rest-auth
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
 ]

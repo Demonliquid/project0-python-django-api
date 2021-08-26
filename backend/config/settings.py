@@ -43,6 +43,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',  # dj-rest-auth
+    # 3rd party
+    'rest_framework',  # dj-rest-auth
+    'rest_framework.authtoken',  # dj-rest-auth
+    'allauth',  # dj-rest-auth
+    'allauth.account',  # dj-rest-auth
+    'allauth.socialaccount',  # dj-rest-auth
+    'dj_rest_auth',  # dj-rest-auth
+    'dj_rest_auth.registration'  # dj-rest-auth
+    'dj_rest_auth.jwt_auth.JWTCookieAuthentication',  # dj-rest-auth
+
+    # LOCAL
     'accounts',
 ]
 
@@ -131,3 +143,28 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Custom user / Accounts #
 AUTH_USER_MODEL = "accounts.CustomUser"
 # End Custom user / Accounts #
+
+
+
+# dj-rest-auth config
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication', # new
+    ],
+}
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = 'my-app-auth'
+JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+SITE_ID = 1
+# end dj-rest-auth config
+
+
+# EMAIL
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # new
+# EMAIL END
+
+

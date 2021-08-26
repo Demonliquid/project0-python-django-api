@@ -14,8 +14,9 @@ django-allauth = "*"
 django-debug-toolbar = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
-dj-rest-auth = "*"
+dj-rest-auth = {extras = ["with_social"], version = "*"}
 pillow = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 
