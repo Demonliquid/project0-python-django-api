@@ -145,12 +145,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication', # new
-        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ],
 }
-REST_USE_JWT = True
-JWT_AUTH_COOKIE = 'my-app-auth'
-JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # new
 
