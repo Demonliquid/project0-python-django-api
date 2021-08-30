@@ -21,7 +21,7 @@ class CryptoViewSet(viewsets.ReadOnlyModelViewSet):
         print(params['pk'])
         # MULTIPLE PARAMTERS
         params_list = params['pk'].split('-')
-        cryptos = Cryptocurrency.objects.filter(cryptocurrency_subtitle=params_list[0], cryptocurrency_name=params_list[1])
+        cryptos = Cryptocurrency.objects.filter(cryptocurrency_subtitle=params_list[0])
         serializer = CryptocurrencySerializer(cryptos, many=True)
         return Response(serializer.data)
 
