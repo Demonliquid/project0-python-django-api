@@ -24,3 +24,9 @@ class CryptoViewSet(viewsets.ReadOnlyModelViewSet):
         cryptos = Cryptocurrency.objects.filter(cryptocurrency_subtitle=params_list[0], cryptocurrency_name=params_list[1])
         serializer = CryptocurrencySerializer(cryptos, many=True)
         return Response(serializer.data)
+
+
+class DolarViewSet(viewsets.ReadOnlyModelViewSet): # new
+    permission_classes = (AllowAny,)
+    queryset = Dolarhoy.objects.all()
+    serializer_class = DolarhoySerializer
