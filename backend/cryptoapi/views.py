@@ -8,19 +8,19 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 
 
-<<<<<<< HEAD
-class CryptoViewSet(viewsets.ModelViewSet): # new
-    permission_classes = (IsAuthenticated,)
-    queryset = Cryptocurrency.objects.all()
-    serializer_class = CryptocurrencySerializer
-=======
-class CryptoViewSet(viewsets.ReadOnlyModelViewSet): # new
+class CryptoViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (AllowAny,)
-    queryset = Cryptocurrency.objects.all()
     serializer_class = CryptocurrencySerializer
 
-class DolarViewSet(viewsets.ReadOnlyModelViewSet): # new
-    permission_classes = (AllowAny,)
-    queryset = Dolarhoy.objects.all()
-    serializer_class = DolarhoySerializer
->>>>>>> parent of 7d864b9 (This commit adds url args to cryptoapi)
+    def get_queryset(self):  # BASIC
+        cryptos = Cryptocurrency.objects.all()
+        return cryptos
+
+    def retrieve(self, request, *args, **kwargs):  # Usar parametros en el URL
+        params = kwargs
+        print(params['pk'])
+        # MULTIPLE PARAMTERS
+        params_list = params['pk'].split('-')
+        cryptos = Cryptocurrency.objects.filter(cryptocurrency_subtitle=params_list[0], cryptocurrency_name=params_list[1])
+        serializer = CryptocurrencySerializer(cryptos, many=True)
+        return Response(serializer.data)
