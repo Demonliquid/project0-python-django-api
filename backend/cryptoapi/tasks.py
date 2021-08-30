@@ -3,13 +3,13 @@ from time import sleep
 from celery import shared_task
 from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
-from .models import Cryptocurrency
+from .models import Cryptocurrency, Dolarhoy
 
 
 @shared_task
 
 def crawl_currency():
-    print('Crawling data and creating objects in database')
+    print('Crawling cryptos')
     req = Request('https://coinranking.com', headers={'User-Agent': 'Mozilla/5.0'})
     html = urlopen(req).read()
     bs = BeautifulSoup(html, 'html.parser')
@@ -42,7 +42,7 @@ def crawl_currency():
 
 
 def update_currency():
-    print('Updating data')
+    print('Updating cryptos')
     req = Request('https://coinranking.com', headers={'User-Agent': 'Mozilla/5.0'})
     html = urlopen(req).read()
     bs = BeautifulSoup(html, 'html.parser')
@@ -73,7 +73,51 @@ def update_currency():
         sleep(3)
 
 
+def crawl_dolar():
+    print('Crawling dollars')
+    req = Request('https://dolarhoy.com/', headers={'User-Agent': 'Mozilla/5.0'})
+    html = urlopen(req).read()
+    bs = BeautifulSoup(html, 'html.parser')
+    rows = bs.find("div", class_="tile is-parent is-7 is-vertical").find_all('div', class_="tile is-child")[0:5]
+    for row in rows:
+        tipo_dolar = row.find('a', class_='title').get_text().strip().replace('\n', '').capitalize()
+        values = row.find_all('div', class_="venta")
+        cotizacion_en_pesos = values[0].get_text().strip().replace('\n', '').replace(' ', '').replace(',', '').replace('$', '')
+        cotizacion_en_pesos = re.sub('[^0-9.]', '', cotizacion_en_pesos)
+        print({'tipo_dolar':tipo_dolar,
+            'cotizacion_en_pesos': cotizacion_en_pesos})
+        Dolarhoy.objects.create(
+                                tipo_dolar=tipo_dolar,
+                                cotizacion_en_pesos=cotizacion_en_pesos
+                                )
+        sleep(3)
+
+
+def update_dolar():
+    print('Updating data')
+    req = Request('https://dolarhoy.com/', headers={'User-Agent': 'Mozilla/5.0'})
+    html = urlopen(req).read()
+    bs = BeautifulSoup(html, 'html.parser')
+    rows = bs.find("div", class_="tile is-parent is-7 is-vertical").find_all('div', class_="tile is-child")[0:5]
+    for row in rows:
+        tipo_dolar = row.find('a', class_='title').get_text().strip().replace('\n', '').capitalize()
+        values = row.find_all('div', class_="venta")
+        cotizacion_en_pesos = values[0].get_text().strip().replace('\n', '').replace(' ', '').replace(',', '').replace('$', '')
+        cotizacion_en_pesos = re.sub('[^0-9.]', '', cotizacion_en_pesos)
+        data = {'tipo_dolar': tipo_dolar,
+                'cotizacion_en_pesos': cotizacion_en_pesos}
+        print({'tipo_dolar': tipo_dolar,
+                'cotizacion_en_pesos': cotizacion_en_pesos})
+        Dolarhoy.objects.filter(tipo_dolar=tipo_dolar).update(**data)
+        sleep(3)
+
+
+
+
 crawl_currency()
+crawl_dolar()
+
 while True:
-	update_currency()
-	sleep(15)
+    update_currency()
+    update_dolar()
+    sleep(15)

@@ -1,8 +1,10 @@
-from .views import CryptoViewSet
-from rest_framework.routers import DefaultRouter
+from .views import CryptoViewSet, DolarViewSet
+from rest_framework.routers import SimpleRouter
 
 app_name = 'cryptoapi'
 
-router = DefaultRouter()
-router.register('', CryptoViewSet, basename='Crypto')
+router = SimpleRouter()
+router.register('crypto', CryptoViewSet, basename ='cryptos')
+router.register('dollar', DolarViewSet, basename ='dollars')
 urlpatterns = router.urls
+
