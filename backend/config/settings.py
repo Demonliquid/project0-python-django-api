@@ -147,8 +147,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',  # for dj-rest-auth/user/ access
-        'rest_framework.authentication.TokenAuthentication', # to be replaced by JWT
+        #'rest_framework.authentication.SessionAuthentication',  # for dj-rest-auth/user/ access
+        #'rest_framework.authentication.TokenAuthentication', # to be replaced by JWT
     ],
 }
 
@@ -182,3 +182,13 @@ ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 #ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/?verification=1'
 LOGIN_URL = 'http://localhost:8000/accounts/login'
 # end custom user #
+
+
+# JWT
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    ],
+}
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = 'my-app-auth'
