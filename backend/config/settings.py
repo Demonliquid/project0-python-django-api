@@ -157,8 +157,6 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # dj-rest-auth
-
 
 SITE_ID = 1 # dj-rest-auth
 # end dj-rest-auth config #
@@ -192,3 +190,12 @@ REST_FRAMEWORK = {
 }
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'my-app-auth'
+
+
+# EMAILS
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # dj-rest-auth
+EMAIL_HOST = env.str('EMAIL_HOST')
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS')
+EMAIL_PORT = env.int('EMAIL_PORT')
+EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')

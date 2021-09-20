@@ -1,6 +1,13 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.db.models.signals import post_save, pre_save
+from environs import Env
+from django.core.mail import send_mail
+from django.conf import settings
+
+env = Env()
+env.read_env()
 
 
 class CustomUserManager(BaseUserManager):
@@ -47,3 +54,14 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
+def notification(sender, instance, **kwargs):  # What to do when updated
+    obj_id = instance.id
+    obj_name = instance.email
+    sent_address = env.str('sent_address')
+    message_title = f'User: {obj_id} was created'
+    message = f'{obj_name} was created as number: {obj_id}'
+    send_mail(message_title, message, settings.EMAIL_HOST_USER, [sent_address], fail_silently = False)
+
+
+post_save.connect(notification, sender=User)  # If sender=User then only notifies User changes
