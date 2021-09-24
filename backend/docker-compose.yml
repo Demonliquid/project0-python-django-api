@@ -3,8 +3,36 @@ version: '3.8'
 services:
   web:
     build: .
-    command: python /code/manage.py runserver 0.0.0.0:8000
+    command: python /code/manage.py runserver 0.0.0.0:8000 # si no se hizo Heroku
+    command: gunicorn config.wsgi -b 0.0.0.0:8000 # si se hizo Heroku
     volumes:
       - .:/code
     ports:
       - 8000:8000
+    depends_on:
+      - db
+    environment:
+      - "SECRET_KEY=yq@=cjw8z@ssx7_3ukfoi9j3di)m-km8=^x9a))p2)3y-24g%*"
+      - "DJANGO_DEBUG=True"
+      - "DJANGO_SECURE_SSL_REDIRECT=False"
+      - "DJANGO_SECURE_HSTS_SECONDS=0"
+      - "DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS=False"
+      - "DJANGO_SECURE_HSTS_PRELOAD=False"
+      - "DJANGO_SESSION_COOKIE_SECURE=False"
+      - "DJANGO_CSRF_COOKIE_SECURE=False"
+      - "EMAIL_HOST=smtp.gmail.com"
+      - "EMAIL_USE_TLS=True"
+      - "EMAIL_PORT=587"
+      - "EMAIL_HOST_USER=testdjangoemail81@gmail.com"
+      - "EMAIL_HOST_PASSWORD=ukpubcsthoqxbcxz"
+      - "sent_address=martinandresfernandez96@gmail.com"
+
+  db:
+    image: postgres:11
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - 'POSTGRES_HOST_AUTH_METHOD=trust'
+
+volumes:
+  postgres_data:
