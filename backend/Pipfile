@@ -4,18 +4,16 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
-gunicorn = "*"
-whitenoise = "*"
-django-crispy-forms = "*"
-environs = {extras = ["django"], version = "*"}
-psycopg2 = "*"
-django-allauth = "*"
-django-debug-toolbar = "*"
-djangorestframework = "*"
-django-cors-headers = "*"
 dj-rest-auth = "*"
-pillow = "*"
+djangorestframework = ">=3.11.0"
+djangorestframework-simplejwt = "==4.7.1"
+django-allauth = ">=0.24.1"
+drf-yasg = "==1.20.0"
+django-cors-headers = "==3.2.1"
+coreapi = "==2.3.3"
+Django = ">=2.2"
+environs = "*"
+dj-database-url = "*"
 
 [dev-packages]
 
