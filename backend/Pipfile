@@ -18,6 +18,8 @@ dj-rest-auth = "*"
 pillow = "*"
 django-storages = "*"
 boto3 = "*"
+psycopg2-binary = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 
