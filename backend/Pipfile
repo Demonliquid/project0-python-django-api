@@ -16,6 +16,8 @@ djangorestframework = "*"
 django-cors-headers = "*"
 dj-rest-auth = "*"
 pillow = "*"
+django-storages = "*"
+boto3 = "*"
 
 [dev-packages]
 
