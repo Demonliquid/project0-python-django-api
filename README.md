@@ -2,17 +2,18 @@
 
 ## Backend
 
-### Branches testables
-- Crypto: Tiene la cotizacion de dolar y cryptos.
-- dj-rest-auth: Login/Registro
+### Project explanaition
+Testing of Django Rest Framework, deployed using Docker-Heroku-PostgreSQL.
 
-### Como iniciar server y bot
-- `cd backend`
-- `pipenv shell`
 
-- En terminales distintas:
-    - `celery -A config  worker -l info` (bot)
-    - `py .\manage.py runserver` (server)
+### Functional branches
+- Signals: Deployed on heroku. Custom user with dj-rest-auth library and JWT and notification to email when Model is updated.
+    - Endpoints:
+        - https://young-citadel-29924.herokuapp.com/accounts/register/
+        - https://young-citadel-29924.herokuapp.com/accounts/login/
+- Crypto: Not deployed. Models with crpto data and celery bot scraper filling each Model.
 
-### Endpoints
-    Cuando entran al server http://127.0.0.1:8000/ les aparece la lista.
+
+### To be added
+- Elastic Search instead of Django-ORM
+- Channels
