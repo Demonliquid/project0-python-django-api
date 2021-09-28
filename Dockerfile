@@ -9,6 +9,7 @@ WORKDIR /code
 
 # Install dependencies
 COPY requirements.txt /app/requirements.txt
+
 RUN set -ex \
     && pip install --upgrade pip \
     && pip install -r /app/requirements.txt
